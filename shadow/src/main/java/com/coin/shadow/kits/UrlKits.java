@@ -17,9 +17,12 @@ import java.util.Map;
  */
 
 public final class UrlKits {
-
+    /***
+     * 禁止外部初始化
+     */
     private UrlKits(){
     }
+    
     /***
      * url 转 map
      * @param url

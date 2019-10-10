@@ -20,7 +20,7 @@ public final class ByteKits {
     }
     /***
      * 字符串转字节数组
-     * @param data
+     * @param data 待转换数据
      * @return
      */
     public static byte[] stringToByteArray(final String data){
@@ -32,7 +32,7 @@ public final class ByteKits {
 
     /***
      * 字节数组转字符串
-     * @param data
+     * @param data 待转换数据
      * @return
      */
     public static String byteArrayToString(final byte[] data){
@@ -44,7 +44,7 @@ public final class ByteKits {
 
     /***
      * 字节数组转十六进制字符串
-     * @param data
+     * @param data 待转换数据
      * @return
      */
     public static String byteArrayToHexString(final byte[] data){
@@ -59,7 +59,7 @@ public final class ByteKits {
 
     /***
      * 十六进制字符串转字节数组
-     * @param data
+     * @param data 待转换数据
      * @return
      */
     public static byte[] hexStringToByteArray(final String data){
@@ -77,7 +77,7 @@ public final class ByteKits {
 
     /***
      * 字符串转成十六进制字符串
-     * @param data
+     * @param data 待转换数据
      * @return
      */
     public static String stringToHexString(final String data){
@@ -91,7 +91,7 @@ public final class ByteKits {
 
     /***
      * 十六进制字符串转字符串
-     * @param data
+     * @param data 待转换数据
      * @return
      */
     public static String hexStringToString(final String data) {
@@ -139,22 +139,47 @@ public final class ByteKits {
     }
 
 
+    /***
+     * 将 short 转换成字节
+     * @param value
+     * @return
+     */
     public final static byte getByte(short value){
         return Short.valueOf(value).byteValue();
     }
 
+    /***
+     * 将 int 转换成字节
+     * @param value
+     * @return
+     */
     public final static byte getByte(int value){
         return Integer.valueOf(value).byteValue();
     }
 
+    /***
+     * 将 long 转换成字节
+     * @param value
+     * @return
+     */
     public final static byte getByte(long value){
         return Long.valueOf(value).byteValue();
     }
 
+    /***
+     * 将 float 转换成字节
+     * @param value
+     * @return
+     */
     public final static byte getByte(float value){
         return Float.valueOf(value).byteValue();
     }
 
+    /***
+     * 将 double 转换成字节
+     * @param value
+     * @return
+     */
     public final static byte getByte(double value){
         return Double.valueOf(value).byteValue();
     }
