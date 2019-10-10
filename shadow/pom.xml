@@ -15,7 +15,6 @@
         <guava.version>27.0-jre</guava.version>
         <commons-lang3.version>3.8</commons-lang3.version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -33,7 +32,5 @@
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
         </dependency>
-
-
     </dependencies>
 </project>
