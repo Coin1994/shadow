@@ -46,3 +46,11 @@ public final class A {
     </dependency>
     ...
 ```
+### 项目结构
+```
+    shadow
+        // 存放一些基础工具，与业务逻辑无关
+        com.coin.shadow.kits
+        // 存放一些基础工具，与业务逻辑有关
+        com.coin.shadow.utils
+```  
