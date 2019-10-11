@@ -60,4 +60,8 @@ public final class FileKits {
         File file = new File(directoryPath);
         return file.isDirectory();
     }
+
+    public static File createFile(String directoryPath,  String fileName){
+        return null;
+    }
 }

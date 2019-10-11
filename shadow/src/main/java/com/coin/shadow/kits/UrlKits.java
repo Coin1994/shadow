@@ -22,7 +22,7 @@ public final class UrlKits {
      */
     private UrlKits(){
     }
-    
+
     /***
      * url 转 map
      * @param url
@@ -63,7 +63,6 @@ public final class UrlKits {
         if (CollectionsKits.isEmpty(map)){
             return null;
         }
-
         StringBuffer sb = new StringBuffer();
         // 遍历keySet()
         for (String key : map.keySet()) {
@@ -73,7 +72,6 @@ public final class UrlKits {
                 sb = sb.append(kv);
             }
         }
-
         String ret = sb.toString();
         if (StringUtils.isEmpty(ret)){
             return null;
