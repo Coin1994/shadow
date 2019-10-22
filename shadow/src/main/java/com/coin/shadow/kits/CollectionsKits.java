@@ -89,4 +89,18 @@ public final class CollectionsKits {
         }
         return map;
     }
+
+    /***
+     * map 转换成 list
+     * @param map
+     * @param <Value>
+     * @return
+     */
+    public static <Value> List<Value> mapToList(Map<?,?> map){
+        if (isEmpty(map)){
+            return emptyList();
+        }
+
+        return null;
+    }
 }
