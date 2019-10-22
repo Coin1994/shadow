@@ -1,6 +1,8 @@
 package com.coin.shadow.kits;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -93,14 +95,16 @@ public final class CollectionsKits {
     /***
      * map 转换成 list
      * @param map
-     * @param <Value>
      * @return
      */
-    public static <Value> List<Value> mapToList(Map<?,?> map){
+    public static  List<Map.Entry <?, ?>> mapToList(Map<?,?> map){
         if (isEmpty(map)){
             return emptyList();
         }
-
-        return null;
+        List<Map.Entry <?, ?>> list = Lists.newArrayList();
+        for (Map.Entry <?, ?> entry : map.entrySet() ){
+            list.add(entry);
+        }
+        return list;
     }
 }
