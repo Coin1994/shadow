@@ -2,11 +2,12 @@ package com.coin.shadow.kits;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.ByteArrayOutputStream;
+import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Map;
@@ -61,6 +62,14 @@ public final class HttpKits {
         if (!host.substring(host.length() - 1).equals("/")){
             host += "/";
         }
+        // GET 方法走这个
+        if (method.equalsIgnoreCase("GET")){
+            boolean flag = params.startsWith("?");
+            if (!flag){
+                host += "?";
+                host += params;
+            }
+        }
         URL url = null;
         HttpURLConnection connection = null;
         try {
@@ -70,8 +79,9 @@ public final class HttpKits {
             setPropertyForConnection(connection, method);
             // 链接
             connection.connect();
-            // 向外写流
-            if (StringUtils.isNotBlank(params)){
+
+            if (StringUtils.isNotBlank(params) && method.equalsIgnoreCase("POST")){
+                // 向外写流
                 OutputStream output = connection.getOutputStream();
                 // TODO 如果报文太长这里可能会有问题
                 output.write(params.getBytes());
@@ -96,7 +106,15 @@ public final class HttpKits {
     private static HttpURLConnection openConnection(URL url){
         HttpURLConnection connection = null;
         try {
-            connection = (HttpURLConnection)url.openConnection();
+            String protocol = url.getProtocol().toLowerCase();
+            if (protocol.equals("http")){
+                connection = (HttpURLConnection)url.openConnection();
+            }else if (protocol.equals("https")){
+                connection = (HttpsURLConnection)url.openConnection();
+                // TODO 绕过 HTTPS 认证
+            }else {
+                connection = (HttpURLConnection)url.openConnection();
+            }
             connection.setConnectTimeout(DEFAULT_CONNECT_TIME_OUT);
             connection.setReadTimeout(DEFAULT_READ_TIME_OUT);
             connection.setDoInput(true);
@@ -110,7 +128,10 @@ public final class HttpKits {
     //
     public static void setPropertyForConnection(HttpURLConnection connection, String method) throws ProtocolException {
         connection.setRequestMethod(method);
+        // 禁用缓存
         connection.setUseCaches(false);
+        // 系统自动处理重定向
+        connection.setInstanceFollowRedirects(true);
         connection.setRequestProperty("Charset", "UTF-8");
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");//设置参数类型是json格式
         connection.setRequestProperty("Connection", "Keep-Alive");
@@ -121,7 +142,5 @@ public final class HttpKits {
 
 
     public static void main(String args[]){
-        String re = HttpKits.get("https://www.baidu.com/", "");
-        System.out.println(re);
     }
 }
