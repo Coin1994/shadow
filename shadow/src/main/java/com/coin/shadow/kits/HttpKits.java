@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Map;
@@ -29,19 +28,22 @@ public final class HttpKits {
     }
 
     public static String post(String host, String params){
-        return "";
+        byte[] bytes = http(host, params, "POST");
+        return ByteKits.byteArrayToString(bytes);
     }
 
     public static String get(String host, Map<String, String> params){
-        return "";
+        byte[] bytes = http(host, params, "GET");
+        return ByteKits.byteArrayToString(bytes);
     }
 
     public static String post(String host, Map<String, String> params){
-        return "";
+        byte[] bytes = http(host, params, "POST");
+        return ByteKits.byteArrayToString(bytes);
     }
 
-    public static String http(String host, Map<String, String> params, String method){
-        return "";
+    public static byte[] http(String host, Map<String, String> params, String method){
+        return http(host, UrlKits.mapToUrl(params),method);
     }
 
     /***
@@ -53,6 +55,12 @@ public final class HttpKits {
      */
     private static byte[] http(String host, String params, String method){
         byte[] buf = new byte[0];
+        if (StringUtils.isBlank(host)){
+            return buf;
+        }
+        if (!host.substring(host.length() - 1).equals("/")){
+            host += "/";
+        }
         URL url = null;
         HttpURLConnection connection = null;
         try {
