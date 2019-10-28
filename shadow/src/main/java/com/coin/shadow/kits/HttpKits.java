@@ -95,6 +95,7 @@ public final class HttpKits {
             }else {
                 input = connection.getInputStream();
             }
+            // TODO 如果是下载文件需要特殊处理
             buf = IoKits.read(input, 1024 * 4);
             connection.disconnect();
         } catch (IOException e) {
