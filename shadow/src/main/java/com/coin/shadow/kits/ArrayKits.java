@@ -15,10 +15,10 @@ public final class ArrayKits {
     }
 
     public static boolean isEmpty(final Object[] array){
-        return getLength(array) == 0;
+        return length(array) == 0;
     }
 
-    public static int getLength(final Object[] array){
+    public static int length(final Object[] array){
         return ObjectKits.isNull(array) ? 0 : Array.getLength(array);
     }
 }
