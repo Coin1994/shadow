@@ -135,14 +135,10 @@ public final class HttpKits {
         // 系统自动处理重定向
         connection.setInstanceFollowRedirects(true);
         connection.setRequestProperty("Charset", "UTF-8");
-        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");//设置参数类型是json格式
+        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");//设置参数类型是urlencoded格式
         connection.setRequestProperty("Connection", "Keep-Alive");
     }
 
     private static int DEFAULT_CONNECT_TIME_OUT = 30 * 1000;
     private static int DEFAULT_READ_TIME_OUT    = 30 * 1000;
-
-
-    public static void main(String args[]){
-    }
 }
