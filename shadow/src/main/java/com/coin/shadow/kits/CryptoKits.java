@@ -1,6 +1,5 @@
 package com.coin.shadow.kits;
 
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.Charset;
