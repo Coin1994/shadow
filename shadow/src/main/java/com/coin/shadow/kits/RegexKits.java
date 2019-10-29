@@ -1,6 +1,7 @@
 package com.coin.shadow.kits;
 
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -28,6 +29,9 @@ public final class RegexKits {
      * @return
      */
     public static boolean match(String regex, String target){
+        if (StringUtils.isBlank(regex) || StringUtils.isBlank(target)){
+            return false;
+        }
         Pattern pattern = compile(regex, true);
         Matcher matcher = pattern.matcher(target);
         return matcher.matches();

@@ -24,7 +24,7 @@ import com.coin.shadow.kits.RegexKits;
  * 联通：1704、1707、1708、1709、171
  * 卫星通信：1349
  */
-public class PhoneUtils {
+public final class PhoneUtils {
     /***
      * 禁止外部初始化
      */
