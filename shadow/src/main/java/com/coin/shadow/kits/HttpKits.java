@@ -2,7 +2,9 @@ package com.coin.shadow.kits;
 
 import org.apache.commons.lang3.StringUtils;
 
+import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSession;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -111,8 +113,10 @@ public final class HttpKits {
             if (protocol.equals("http")){
                 connection = (HttpURLConnection)url.openConnection();
             }else if (protocol.equals("https")){
-                connection = (HttpsURLConnection)url.openConnection();
-                // TODO 绕过 HTTPS 认证
+                HttpsURLConnection target = (HttpsURLConnection)url.openConnection();
+                // 绕过HTTPS
+                target.setHostnameVerifier((hostname, session)-> true);
+                connection = target;
             }else {
                 connection = (HttpURLConnection)url.openConnection();
             }

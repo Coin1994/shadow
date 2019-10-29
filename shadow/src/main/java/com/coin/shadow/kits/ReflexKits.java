@@ -1,6 +1,7 @@
 package com.coin.shadow.kits;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -15,6 +16,9 @@ import java.util.Map;
  * @version: v1.0.0.0
  */
 public final class ReflexKits {
+    /***
+     * 禁止外部初始化
+     */
     private ReflexKits(){
     }
 
@@ -32,11 +36,13 @@ public final class ReflexKits {
 
     /***
      * @param map
-     * @param object
+     * @param clz
      * @param ignore
      * @return
      */
-    public static Map<String, Object> getFields(Map<String, Object> map, Object object, boolean ignore){
+    public static Map<String, Object> getFields(Map<String, Object> map, Class<?> clz, boolean ignore){
+        map = CollectionsKits.isEmpty(map) ? Maps.newHashMap() : map;
+        
         return null;
     }
 

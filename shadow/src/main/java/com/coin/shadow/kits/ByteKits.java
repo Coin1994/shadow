@@ -134,8 +134,26 @@ public final class ByteKits {
      * @param target
      * @return
      */
-    public static String convert62To10(String target){
-        return "";
+    public static String convertBase62ToDecimal(String target) {
+        int decimal = 0, base = 62, kpi = 0, cnt = 0;
+
+        byte ident[] = target.getBytes();
+        for ( int i = ident.length - 1; i >= 0; i-- ) {
+            int num = 0;
+            if ( ident[i] > 48 && ident[i] <= 57 ) {
+                num = ident[i] - 48;
+            }
+            else if ( ident[i] >= 65 && ident[i] <= 90 ) {
+                num = ident[i] - 65 + 10;
+            }
+            else if ( ident[i] >= 97 && ident[i] <= 122 ) {
+                num = ident[i] - 97 + 10 + 26;
+            }
+            kpi = (int) Math.pow(base, cnt);
+            decimal += num * kpi;
+            cnt++;
+        }
+        return String.format( "%08d", decimal);
     }
 
 
