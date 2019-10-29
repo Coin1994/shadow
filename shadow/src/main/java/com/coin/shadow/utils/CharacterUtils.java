@@ -44,8 +44,14 @@ public final class CharacterUtils {
         return RegexKits.match(NUMBER_REGEX, number);
     }
 
+    /***
+     * 是否是对应精度的数字
+     * @param number
+     * @param count
+     * @return
+     */
     public static boolean isDecimalNumber(String number, int count){
-        return RegexKits.match(String.format(DECIMAL_NUMBER_REGEX,count), number);
+        return RegexKits.match(String.format(DECIMAL_NUMBER_REGEX, count), number);
     }
 
     private final static String CHINESE_REGEX = "^[\u4e00-\u9fa5],{0,}$";
