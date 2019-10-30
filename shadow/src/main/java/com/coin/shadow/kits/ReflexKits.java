@@ -35,6 +35,7 @@ public final class ReflexKits {
     }
 
     /***
+     * 返回一个空的值为空的Map 目前来看这个方法没什么用。先留着吧
      * @param map
      * @param clz
      * @param ignore
@@ -42,8 +43,11 @@ public final class ReflexKits {
      */
     public static Map<String, Object> getFields(Map<String, Object> map, Class<?> clz, boolean ignore){
         map = CollectionsKits.isEmpty(map) ? Maps.newHashMap() : map;
-        
-        return null;
+        Field[] fields = clz.getDeclaredFields();
+        for (Field field : fields) {
+            map.put(field.getName(), null);
+        }
+        return ignore ? map : getFields(map, clz.getSuperclass(), true);
     }
 
     public static boolean isInterface(Class<?> clz){

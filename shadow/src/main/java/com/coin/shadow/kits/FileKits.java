@@ -3,7 +3,6 @@ package com.coin.shadow.kits;
 import com.google.common.collect.Lists;
 
 import java.io.*;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -291,6 +290,14 @@ public final class FileKits {
         }
         return false;
     }
+
+    /***
+     * 写文件
+     * @param src   源文件
+     * @param dest  目标文件
+     * @param append 写模式
+     * @return
+     */
     private static boolean writeFile(File src,  File dest, boolean append){
         try {
             return IoKits.writeFile(dest, new FileInputStream(src),1024 * 4 * 2, append);
@@ -299,6 +306,13 @@ public final class FileKits {
         }
         return false;
     }
+    /***
+     * 写文件
+     * @param dest  目标文件
+     * @param input   文件流
+     * @param append 写模式
+     * @return
+     */
     private static boolean writeFile(File dest, InputStream input, boolean append){
         return IoKits.writeFile(dest,input,1024 * 4 * 2, append);
     }
