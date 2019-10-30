@@ -104,6 +104,17 @@ public final class StringKits {
         return UUID.randomUUID().toString().replace("-","");
     }
 
+
+    /**
+     * 获取最后一个字符
+     * @param target
+     * @return
+     */
+    public final static String lastString(final String target){
+        return isBlank(target) ? "" : target.substring(target.length() - 1);
+    }
+
+
     /***
      * html 转义
      */
