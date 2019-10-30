@@ -1,7 +1,10 @@
 package com.coin.shadow.kits;
 
-import java.io.File;
-import java.io.IOException;
+import com.google.common.collect.Lists;
+
+import java.io.*;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author ：孙伟
@@ -67,11 +70,15 @@ public final class FileKits {
      * @return
      */
     public static boolean removeFile(final String path){
-        File file = getFile(path);
-        if (!isFile(file)){
-            return true;
-        }
-        return file.delete();
+        return removeFile(getFile(path));
+    }
+    /***
+     * remove 操作
+     * @param file
+     * @return
+     */
+    public static boolean removeFile(final File file){
+        return file != null && file.delete();
     }
     /***
      * 判断是否为文件
@@ -155,6 +162,64 @@ public final class FileKits {
         return file != null && file.exists();
     }
 
+    /***
+     * 获取当前目录下的目录(找一层)
+     * @return
+     */
+    public static List<File> getDirectories(String directory){
+        directory = checkDirectoryName(directory);
+        File target = getFile(directory);
+        if (!isDirectory(target)){
+            return CollectionsKits.emptyList();
+        }
+        List<File> ret = Lists.newArrayList();
+        for (File file : target.listFiles()) {
+            if (isDirectory(file)){
+                ret.add(file);
+            }
+        }
+        return ret;
+    }
+
+    /***
+     * 获取当前目录下的文件 （找一层）
+     * @return
+     */
+    public static List<File> getFiles(String directory){
+        directory = checkDirectoryName(directory);
+        File target = getFile(directory);
+        if (!isDirectory(target)){
+            return CollectionsKits.emptyList();
+        }
+        List<File> ret = Lists.newArrayList();
+        for (File file : target.listFiles()) {
+            if (isFile(file)){
+                ret.add(file);
+            }
+        }
+        return ret;
+    }
+
+    /***
+     * 获取当前目录下的文件名称 （找一层）
+     * @return
+     */
+    public static List<String> getFileNames(String directory){
+        directory = checkDirectoryName(directory);
+        File target = getFile(directory);
+        if (!isDirectory(target)){
+            return CollectionsKits.emptyList();
+        }
+
+        List<String> ret = Lists.newArrayList();
+        for (File file : target.listFiles()) {
+            if (isFile(file)){
+                ret.add(file.getPath());
+            }
+        }
+        return ret;
+    }
+
     /**
      * 检查传入目录路径
      * @param directory
@@ -167,7 +232,6 @@ public final class FileKits {
         }
         return directory;
     }
-
 
     /**
      * 获取一个文件
@@ -212,6 +276,31 @@ public final class FileKits {
             return true;
         }
         return file.mkdir();
+    }
+
+    private static boolean copyOrMoveFile(File src, File dest, boolean isMove){
+        if (!isFile(src) || !isFile(dest)){
+            return false;
+        }
+        if (isMove){
+            if (writeFile(src, dest,false)){
+                return removeFile(src);
+            }
+        }else {
+            return writeFile(src, dest,false);
+        }
+        return false;
+    }
+    private static boolean writeFile(File src,  File dest, boolean append){
+        try {
+            return IoKits.writeFile(dest, new FileInputStream(src),1024 * 4 * 2, append);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    private static boolean writeFile(File dest, InputStream input, boolean append){
+        return IoKits.writeFile(dest,input,1024 * 4 * 2, append);
     }
 
     public static void main(String argc[]){

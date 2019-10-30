@@ -97,6 +97,8 @@ public final class IoKits {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            close(input);
         }
         return fileContent;
     }
@@ -133,21 +135,66 @@ public final class IoKits {
             return ret;
         }
         size = size <= 0 ? DEFAULT_POOL_SIZE : size;
+        ByteArrayOutputStream output = null;
         try{
             int len = -1;
             byte [] buf = new byte[size];
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            output = new ByteArrayOutputStream();
             while ((len = input.read(buf)) != -1){
                 output.write(buf, 0, len);
             }
             ret = output.toByteArray();
-            output.flush();
-            output.close();
-            input.close();
         }catch (IOException e){
             e.printStackTrace();
+        }finally {
+            close(output, input);
         }
         return ret;
+    }
+
+    /***
+     * 关闭流
+     * @param closeables
+     */
+    public static void close(Closeable... closeables){
+        if (ArrayKits.isEmpty(closeables)){
+            return;
+        }
+        try {
+            for (Closeable closeable: closeables) {
+                if (closeable != null){
+                    closeable.close();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean writeFile(String path, InputStream input, int size, boolean append){
+        return writeFile(new File(path), input, size, append);
+    }
+
+    public static boolean writeFile(File file, InputStream input, int size, boolean append){
+        if (ObjectKits.isNull(input)){
+            return false;
+        }
+        size = size <= 0 ? DEFAULT_POOL_SIZE : size;
+        BufferedOutputStream output = null;
+        try {
+            int len = -1;
+            byte [] buf = new byte[size];
+            output = new BufferedOutputStream(new FileOutputStream(file,append));
+            while ((len = input.read(buf,0, size)) != -1){
+                output.write(buf, 0, len);
+            }
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            close(output, input);
+        }
+        return false;
     }
 
 
