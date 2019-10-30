@@ -67,7 +67,7 @@ public final class FileKits {
      * @return
      */
     public static boolean removeFile(final String path){
-        File file = new File(path);
+        File file = getFile(path);
         if (!isFile(file)){
             return true;
         }
