@@ -40,7 +40,6 @@ public final class Response<Type> implements java.io.Serializable {
         return result(DefaultResponseStatus.FAILED.getCode(), message, null);
     }
 
-
     public final static  <Type> Response<Type> result(ResponseStatus status){
         return result(status.getCode(), status.getDesc(), null);
     }

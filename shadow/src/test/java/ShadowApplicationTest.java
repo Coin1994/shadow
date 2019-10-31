@@ -1,10 +1,9 @@
 import com.coin.shadow.kits.IoKits;
 import base.TestCase;
-import org.apache.commons.lang3.StringUtils;
+import com.coin.shadow.kits.StringKits;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public class ShadowApplicationTest {
     public static void run() throws Exception {
         InputStream input = new FileInputStream(new File("D:/github/shadow/shadow/src/test/java/load.properties"));
         IoKits.readContent(input, (lineContent)->{
-            if (StringUtils.isBlank(lineContent)){
+            if (StringKits.isBlank(lineContent)){
                 return "";
             }
             Class<?> target = null;
