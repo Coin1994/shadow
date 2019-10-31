@@ -4,6 +4,7 @@ import com.coin.shadow.func.Action;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
+import java.util.function.Function;
 
 /**
  * @author ：孙伟
@@ -75,7 +76,7 @@ public final class IoKits {
      * @param action
      * @return
      */
-    public static String readContent(InputStream input, Action<String> action){
+    public static String readContent(InputStream input, Function<String, String> action){
         String fileContent = "";
 
         if (ObjectKits.isNull(input)){

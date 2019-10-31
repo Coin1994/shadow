@@ -1,11 +1,17 @@
 package com.coin.shadow.kits;
 
+import com.google.common.collect.Lists;
+
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.Charset;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 
 /**
  * @author ：孙伟
@@ -78,6 +84,48 @@ public final class CryptoKits {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 默认提供不待过滤器的实现
+     * @param map
+     * @return 拼接后的字符串
+     */
+    public static <T> String link(Map<String, T> map){
+        return link(map, null);
+    }
+
+    /**
+     * 把数组所有的元素排序, 并且按照 key=value 的模式用 & 拼接成字符串
+     * @param map       需要排序并参与字符串拼接的 map
+     * @param filter    自定义过滤方法
+     * @return 拼接后的字符串
+     */
+    public static <T> String link(Map<String, T> map, Function<String, Boolean> filter){
+        if (CollectionsKits.isEmpty(map)){
+            return null;
+        }
+        List<String> keys = Lists.newArrayList(map.keySet());
+        Collections.sort(keys);
+
+        StringBuilder sb = new StringBuilder();
+        for (String key : keys) {
+            if ((filter != null && filter.apply(key))){
+                // 如果过滤器不为空并且完成过滤 则跳过
+                continue;
+            }
+            T value = map.get(key);
+            if (StringKits.isEmpty(value.toString())){
+                // 如果值为空 则跳过
+                continue;
+            }
+            sb.append(key).append("=").append(value).append("&");
+        }
+        int size = sb.length() -1;
+        if (sb.indexOf("&", size) > 0){
+            sb.deleteCharAt(size);
+        }
+        return sb.toString();
     }
 
     private static final String MD5 = "MD5";

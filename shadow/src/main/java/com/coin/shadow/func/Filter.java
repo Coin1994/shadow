@@ -9,5 +9,5 @@ package com.coin.shadow.func;
  */
 @FunctionalInterface
 public interface Filter<T> {
-    boolean filter(T data);
+    boolean apply(T data);
 }
