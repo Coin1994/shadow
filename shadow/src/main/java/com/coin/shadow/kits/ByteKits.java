@@ -1,6 +1,5 @@
 package com.coin.shadow.kits;
 
-import org.apache.commons.lang3.StringUtils;
 
 import java.nio.charset.Charset;
 import java.util.Stack;
@@ -24,7 +23,7 @@ public final class ByteKits {
      * @return
      */
     public static byte[] stringToByteArray(final String data){
-        if (StringUtils.isBlank(data)){
+        if (StringKits.isBlank(data)){
             return null;
         }
         return data.getBytes(Charset.forName("UTF-8"));
@@ -63,7 +62,7 @@ public final class ByteKits {
      * @return
      */
     public static byte[] hexStringToByteArray(final String data){
-        if (StringUtils.isBlank(data)){
+        if (StringKits.isBlank(data)){
             return new byte[0];
         }
         int length = data.length() / 2;

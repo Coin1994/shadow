@@ -1,7 +1,6 @@
 package com.coin.shadow.kits;
 
 import com.google.common.collect.Maps;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -29,7 +28,7 @@ public final class UrlKits {
      * @return
      */
     public static Map<String, String> urlToMap(final String url){
-        if (StringUtils.isBlank(url)){
+        if (StringKits.isBlank(url)){
             return CollectionsKits.emptyMap();
         }
 
@@ -41,7 +40,7 @@ public final class UrlKits {
 
         // params 为空
         String params = url.substring(index + 1);
-        if (StringUtils.isBlank(params)){
+        if (StringKits.isBlank(params)){
             return CollectionsKits.emptyMap();
         }
 
@@ -67,13 +66,13 @@ public final class UrlKits {
         // 遍历keySet()
         for (String key : map.keySet()) {
             String value = map.get(key);
-            if (StringUtils.isNotBlank(value)){
+            if (StringKits.isNotBlank(value)){
                 String kv = key + "=" + value + "&";
                 sb = sb.append(kv);
             }
         }
         String ret = sb.toString();
-        if (StringUtils.isEmpty(ret)){
+        if (StringKits.isEmpty(ret)){
             return null;
         }
         // 去除最后一个&符号
@@ -83,7 +82,7 @@ public final class UrlKits {
 
 
     public static String encodeUrl(String url){
-        if (StringUtils.isBlank(url)){
+        if (StringKits.isBlank(url)){
             return null;
         }
 
@@ -97,7 +96,7 @@ public final class UrlKits {
 
 
     public static String decodeUrl(String url){
-        if (StringUtils.isBlank(url)){
+        if (StringKits.isBlank(url)){
             return null;
         }
         try {

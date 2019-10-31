@@ -1,6 +1,5 @@
 package com.coin.shadow.kits;
 
-import org.apache.commons.lang3.StringUtils;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
@@ -55,7 +54,7 @@ public final class HttpKits {
      */
     private static byte[] http(String host, String params, String method){
         byte[] buf = new byte[0];
-        if (StringUtils.isBlank(host)){
+        if (StringKits.isBlank(host)){
             return buf;
         }
         if (!host.substring(host.length() - 1).equals("/")){
@@ -79,7 +78,7 @@ public final class HttpKits {
             // 链接
             connection.connect();
 
-            if (StringUtils.isNotBlank(params) && method.equalsIgnoreCase("POST")){
+            if (StringKits.isNotBlank(params) && method.equalsIgnoreCase("POST")){
                 // 向外写流
                 OutputStream output = connection.getOutputStream();
                 // TODO 如果报文太长这里可能会有问题

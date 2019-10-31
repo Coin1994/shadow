@@ -1,7 +1,5 @@
 package com.coin.shadow.kits;
 
-import com.coin.shadow.func.Action;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
 import java.util.function.Function;
@@ -28,7 +26,7 @@ public final class IoKits {
      */
     public static String readContent(String content){
         String fileContent = "";
-        if (StringUtils.isBlank(content)){
+        if (StringKits.isBlank(content)){
             return fileContent;
         }
         try {

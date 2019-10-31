@@ -1,5 +1,4 @@
 package com.coin.shadow.kits;
-import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -83,7 +82,7 @@ public final class DateKits {
         if (date == null){
             return null;
         }
-        if (StringUtils.isBlank(format)){
+        if (StringKits.isBlank(format)){
             return getStringFromDate(date,DEFAULT_DATE_FORMAT);
         }
         try {
@@ -110,11 +109,11 @@ public final class DateKits {
      * @return
      */
     public static Date getDateFromString(String time, String format){
-        if (StringUtils.isBlank(time)){
+        if (StringKits.isBlank(time)){
             return null;
         }
 
-        if (StringUtils.isBlank(format)){
+        if (StringKits.isBlank(format)){
             return getDateFromString(time, DEFAULT_DATE_FORMAT);
         }
 
@@ -137,8 +136,6 @@ public final class DateKits {
         calendar.add(calendarField, amount);
         return calendar.getTime();
     }
-
-
     // 默认的时间格式
     public final static String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
     public final static String SIMPLE_DATE_FORMAT = "yyyy-MM-dd hh:mm:ss";
@@ -146,22 +143,5 @@ public final class DateKits {
     public final static String DEFAULT_DATE_FORMAT_WITHOUT_SEPARATOR ="yyyyMMdd";
     public final static String SIMPLE_DATE_FORMAT_WITHOUT_SEPARATOR ="yyyyMMddhhmmss";
     public final static String LONG_DATE_FORMAT_WITHOUT_SEPARATOR ="yyyyMMddhhmmsssss";
-
-
-    public static void main(String argc[]){
-        System.out.println(getStringFromDate(new Date()));
-        System.out.println(getStringFromDate(new Date(),SIMPLE_DATE_FORMAT));
-        System.out.println(getStringFromDate(new Date(),LONG_DATE_FORMAT));
-        System.out.println(getStringFromDate(new Date(),DEFAULT_DATE_FORMAT_WITHOUT_SEPARATOR));
-        System.out.println(getStringFromDate(new Date(),SIMPLE_DATE_FORMAT_WITHOUT_SEPARATOR));
-        System.out.println(getStringFromDate(new Date(),LONG_DATE_FORMAT_WITHOUT_SEPARATOR));
-
-        System.out.println(getDateFromString("2018-06-23"));
-        System.out.println(getDateFromString("2018-06-23 05:34:28", SIMPLE_DATE_FORMAT));
-        System.out.println(getDateFromString("2018-06-23 05:35:38:038", LONG_DATE_FORMAT));
-        System.out.println(getDateFromString("20180623", DEFAULT_DATE_FORMAT_WITHOUT_SEPARATOR));
-        System.out.println(getDateFromString("20180623054022", SIMPLE_DATE_FORMAT_WITHOUT_SEPARATOR));
-        System.out.println(getDateFromString("20180623054000022", LONG_DATE_FORMAT_WITHOUT_SEPARATOR));
-    }
 
 }
