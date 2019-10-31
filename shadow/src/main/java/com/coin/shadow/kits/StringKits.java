@@ -114,8 +114,41 @@ public final class StringKits {
         return isBlank(target) ? "" : target.substring(target.length() - 1);
     }
 
+    /***
+     * 将驼峰标识的命名的字符串转成下划线大写方式。
+     * @param name
+     * @return
+     */
+    public static String underscoreName(final String name){
+        if (StringKits.isBlank(name)){
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (Character c : name.toCharArray()) {
+            if (c.compareTo('a') < 0 && !Character.isDigit(c)){
+                sb.append("_").append(c.toString().toLowerCase());
+            }else {
+                sb.append(c);
+            }
+        }
+        return sb.toString().toLowerCase();
+    }
 
     /***
-     * html 转义
+     * 判断某字符串与一组字符串是否相等
+     * @param target
+     * @param css
+     * @return
      */
+    public static boolean equals(CharSequence target, CharSequence ... css){
+        if (isEmpty(target) || ArrayKits.isEmpty(css)){
+            return false;
+        }
+        for (CharSequence cs : css) {
+            if (!cs.equals(target)){
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -232,6 +232,21 @@ public final class FileKits {
         return directory;
     }
 
+    /***
+     *  获取文件的后缀名
+     * @return
+     */
+    public static String getFileExtName(String fileName){
+        if (StringKits.isBlank(fileName)){
+            return null;
+        }
+        int lastIndex = fileName.lastIndexOf(".");
+        if (lastIndex < 0){
+            return fileName;
+        }
+        return fileName.substring(lastIndex + 1);
+    }
+
     /**
      * 获取一个文件
      * @param path
@@ -315,11 +330,5 @@ public final class FileKits {
      */
     private static boolean writeFile(File dest, InputStream input, boolean append){
         return IoKits.writeFile(dest,input,1024 * 4 * 2, append);
-    }
-
-    public static void main(String argc[]){
-        File file = new File("D:/github/note/blog/hello.txt");
-        System.out.println(file.getName());
-        System.out.println(file.getPath());
     }
 }
