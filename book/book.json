@@ -10,11 +10,6 @@
     "structure": {
         "readme": "README.md"
     },
-    "links": {
-        "sidebar": {
-            "百度": "https://www.baidu.com/"
-        }
-    },
     "plugins": [
         "-sharing",
         "splitter",
@@ -35,7 +30,7 @@
         "github-buttons": {
             "buttons": [{
                 "user": "Coin1994",
-                "repo": "note",
+                "repo": "shadow",
                 "type": "star",
                 "size": "small",
                 "count": true
