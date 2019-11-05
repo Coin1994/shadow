@@ -10,6 +10,9 @@ import java.lang.reflect.Array;
  * @version: v1.0.0.0
  */
 public final class ArrayKits {
+    /***
+     * 禁止外部初始化
+     */
     private ArrayKits(){
     }
 
